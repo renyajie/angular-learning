@@ -1,1 +1,87 @@
-/* You can add global styles to this file, and also import other style files */
+/* @import url('https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css'); */
+
+/* Master Styles */
+  h1,h2,nav{
+    text-align: center
+  }
+  .center{
+    text-align: center
+  }
+  h1 {
+    color: #369;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 250%;
+  }
+
+  h2 {
+    color: #444;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 200%;
+  }
+
+  h3 {
+    color: #444;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 150%
+  }
+  
+  body {
+    margin: 2em;
+  }
+  body, input[text], button {
+    color: #888;
+    font-family: Cambria, Georgia;
+  }
+  a {
+    cursor: pointer;
+    cursor: hand;
+  }
+  button {
+    font-family: Arial;
+    background-color: #eee;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    cursor: hand;
+  }
+  button:hover {
+    background-color: #cfd8dc;
+  }
+  button:disabled {
+    background-color: #eee;
+    color: #aaa;
+    cursor: auto;
+  }
+  
+  /* Navigation link styles */
+  nav a {
+    padding: 5px 10px;
+    text-decoration: none;
+    margin-right: 10px;
+    margin-top: 10px;
+    display: inline-block;
+    background-color: #eee;
+    border-radius: 4px;
+  }
+  nav a:visited, a:link {
+    color: #607D8B;
+  }
+  nav a:hover {
+    color: #039be5;
+    background-color: #CFD8DC;
+  }
+  nav a.active {
+    color: #039be5;
+  }
+
+  hr.hr1{ height:10px;border:none;border-top:10px groove #FF8C00;} 
+  hr.hr2{ height:5px;border:none;border-top:5px ridge #45D6D8;}
+  hr.hr3{ height:1px;border:none;border-top:1px dashed #1E90FF;}  
+  hr.hr4{ height:1px;border:none;border-top:1px solid #000;}  
+  hr.hr5{ height:3px;border:none;border-top:3px double #6B8E23;}  
+  
+  /* everywhere else */
+  * {
+    font-family: Arial, Helvetica, sans-serif;
+  }

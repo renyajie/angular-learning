@@ -1,0 +1,136 @@
+<h3>!!!Form By Template Driven</h3>
+<p>
+  Let's go!
+</p>
+
+<div class="container">
+  <h3>Hero Form Version 1.0: 最基本和直观的表单</h3>
+  {{diagnostic}}
+  <form>
+    <!-- 表单的基本结构: Start -->
+
+    <div class="form-group">
+      <!-- label的for和input的id相匹配, name是Angular的FormsModule为控制控件所需的 -->
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name" required
+        [(ngModel)]="model.name" name="name" #spy>
+      <!-- 通过这种方式查看input的class  -->
+      <br> TODO: remove this: {{spy.className}}
+    </div>
+
+    <div class="form-group">
+      <label for="alterEgo">ElterEgo</label>
+      <input type="text" class="form-control" id="alterEgo"
+        [(ngModel)]="model.alterEgo" name="alterEgo">
+    </div>
+
+    <div class="form-group">
+      <label for="power">Power</label>
+      <select class="form-control" id="power" required
+        [(ngModel)]="model.power" name="power">
+        <option *ngFor="let pow of powers" [value]="pow">{{pow}}</option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn-success">Submit</button>
+    
+    <!-- 表单的基本结构: Start -->
+  </form>
+</div>
+
+<div class="container">
+  <h3>Hero Form Version 2.0: 添加了提示信息</h3>
+
+  <!-- 通过Angular获取form控件的引用，以便对表单进行控制 -->
+  <form #heroForm="ngForm">
+
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name" required
+        [(ngModel)]="model.name" name="name" #name="ngModel">
+      <!-- 全靠name引用来控制表单控件 -->
+      <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+        Name is required
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="alterEgo">ElterEgo</label>
+      <input type="text" class="form-control" id="alterEgo"
+        [(ngModel)]="model.alterEgo" name="alterEgo">
+    </div>
+
+    <div class="form-group">
+      <label for="power">Power</label>
+      <select class="form-control" id="power" required
+        [(ngModel)]="model.power" name="power" #power="ngModel">
+        <option *ngFor="let pow of powers" [value]="pow">{{pow}}</option>
+      </select>
+      <div [hidden]="power.valid || power.pristine" class="alert alert-danger">
+        Power is required
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-success">Submit</button>
+    <!-- reset()方法让表单里的所有控件的状态都恢复成初始值 -->
+    <button type="button" class="btn btn-default" (click)="newHero(); heroForm.reset()">New Hero</button>
+  </form>
+</div>
+
+<div class="container">
+  <h3>Hero Form Version 3.0: 添加提交方法，和信息展示</h3>
+  <div [hidden]="submitted">
+    <!-- 通过Angular获取form控件的引用，以便对表单进行控制 -->
+    <form (ngSubmit)="onSubmit()" #heroForm="ngForm">
+
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" required
+          [(ngModel)]="model.name" name="name" #name="ngModel">
+        <!-- 全靠name引用来控制表单控件 -->
+        <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+          Name is required
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="alterEgo">ElterEgo</label>
+        <input type="text" class="form-control" id="alterEgo"
+          [(ngModel)]="model.alterEgo" name="alterEgo">
+      </div>
+
+      <div class="form-group">
+        <label for="power">Power</label>
+        <select class="form-control" id="power" required
+          [(ngModel)]="model.power" name="power" #power="ngModel">
+          <option *ngFor="let pow of powers" [value]="pow">{{pow}}</option>
+        </select>
+        <div [hidden]="power.valid || power.pristine" class="alert alert-danger">
+          Power is required
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-success" [disabled]="!heroForm.form.valid">Submit</button>
+      <!-- reset()方法让表单里的所有控件的状态都恢复成初始值 -->
+      <button type="button" class="btn btn-default" (click)="newHero(); heroForm.reset()">New Hero</button>
+    </form>
+  </div>
+
+  <div [hidden]="!submitted">
+    <h2>You submitted the following:</h2>
+    <div class="row">
+      <div class="col-xs-3">Name</div>
+      <div class="col-xs-9  pull-left">{{ model.name }}</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3">Alter Ego</div>
+      <div class="col-xs-9 pull-left">{{ model.alterEgo }}</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3">Power</div>
+      <div class="col-xs-9 pull-left">{{ model.power }}</div>
+    </div>
+    <br>
+    <button class="btn btn-primary" (click)="submitted=false">Edit</button>
+  </div>
+</div>

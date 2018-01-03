@@ -1,0 +1,84 @@
+<div class="center">
+  <h3>Angular和SSM整合基础测试</h3>
+  <ul>
+    <li *ngFor="let tip of tips"><strong>{{tip}}</strong></li>
+  </ul>
+</div>
+
+<h3><strong>GET: 简单的请求信息</strong></h3>
+<button (click)="getSimpleMessage()">Get one</button>
+{{getMessageOne}}
+
+<h3><strong>GET: 带有参数的请求信息</strong></h3>
+<button (click)="getSimpleMessageWithParams()">Get two</button>
+{{getMessageTwo}}
+
+<h3><strong>GET: 请求单个对象</strong></h3>
+<button (click)="getSimpleObject()">Get three</button>
+{{getMessageThree}}
+
+<h3><strong>GET: 请求一组对象</strong></h3>
+<button (click)="getObjectList()">Get four</button>
+{{getMessageFour}}
+
+<h3><strong>POST: 提交信息</strong></h3>
+<button (click)="receiveMessageFromWebsite()">Post one</button>
+{{postMessageOne}}
+
+<h3><strong>POST: 提交信息 Form表单</strong></h3>
+<div class="left">
+  <div [hidden]="submitted">
+    <!-- 通过Angular获取form控件的引用，以便对表单进行控制 -->
+    <form (ngSubmit)="onSubmit()" #employeeForm="ngForm">
+
+      <div class="form-group">
+        <label for="empName">Name</label>
+        <input type="text" class="form-control" id="empName" required
+          [(ngModel)]="model.empName" name="empName" #empName="ngModel">
+        <!-- 全靠name引用来控制表单控件 -->
+        <div [hidden]="empName.valid || empName.pristine" class="alert alert-danger">
+          Name is required
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="email" required
+          [(ngModel)]="model.email" name="email" #email="ngModel">
+        <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
+          Email is required
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-success" [disabled]="!employeeForm.form.valid">Submit</button>
+      <!-- reset()方法让表单里的所有控件的状态都恢复成初始值 -->
+      <button type="button" class="btn btn-default" (click)="newEmployee(); employeeForm.reset()">New Employee</button>
+    </form>
+  </div>
+
+  <div [hidden]="!submitted">
+    <h2>You submitted the following:</h2>
+    <div class="row">
+      <div class="col-xs-3">Name</div>
+      <div class="col-xs-9  pull-left">{{ model.empName }}</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3">Email</div>
+      <div class="col-xs-9 pull-left">{{ model.email }}</div>
+    </div>
+    <br>
+    <button class="btn btn-primary" (click)="submitted=false">Edit</button>
+    <button class="btn btn-primary" (click)="receiveMessageFromWebsiteByForm(); newEmployee(); employeeForm.reset(); submitted=false; ">Confirm</button>
+  </div>
+</div>
+{{postMessageTwo}}
+
+<h3><strong>DELETE: 提交信息</strong></h3>
+<input #delete>
+<button (click)="deleteMessage(delete.value)">Delete one</button>
+{{deleteMessageOne}}
+
+<h3><strong>PUT: 提交信息</strong></h3>
+<input #put>
+<button (click)="putMessage(put.value)">Put one</button>
+{{putMessageOne}}
